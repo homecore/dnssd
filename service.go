@@ -147,8 +147,10 @@ func (s *Service) Interfaces() []*net.Interface {
 
 // IPsAtInterface returns the ip address at a specific interface.
 func (s *Service) IPsAtInterface(iface *net.Interface) []net.IP {
-	if ips, ok := s.ifaceIPs[iface.Name]; ok {
-		return ips
+	if len(s.ifaceIPs) > 0 {
+		if ips, ok := s.ifaceIPs[iface.Name]; ok {
+			return ips
+		}
 	}
 
 	if len(s.IPs) > 0 {
